@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>NodeJS Starter Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/style.css">
+  </head>
+
+  <body>
+  <div style="width:800px; margin: 100px auto 0 50px;">
+  <form action="ask" method="POST">
+	<textarea type="text" name="question" style="width:80%;" rows="2"></textarea>
+	<input type="submit" value="Ask Watson" >
+  </form>
+  </div>
+  <div style="width:800px; margin: 100px auto 0 50px;">
+  <form action="analyzeText" method="POST">
+	<textarea type="text" name="content" style="width:80%;" rows="12"></textarea>
+	<input type="submit" value="AnalyzeText" >
+  </form>
+  </div>
+  </body>
+
+</html>
