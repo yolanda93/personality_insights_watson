@@ -39,13 +39,13 @@ function parseVcapServices() {
 var testEnvironment = {
   "personality_insights": [
     {
-      "name": "Personality Insights-co",
+      "name": "Personality Insights-25",
       "label": "personality_insights",
-      "plan": "standard",
+      "plan": "tiered",
       "credentials": {
         "url": "https://gateway.watsonplatform.net/personality-insights/api",
-        "username": "enter_value_from_Bluemix",
-        "password": "enter_value_from_Bluemix"
+        "password": "5QRmBbYgtOWU",
+        "username": "3c477834-2760-4420-81de-32cb0e6927ac"
       }
     }
   ]

@@ -26,11 +26,6 @@ app.use(bodyParser.urlencoded({
 );
 app.use(bodyParser.json());
 
-//var router = express.Router();
-//router.get('/', function(req, res) {
-//	res.json({message:  "welcome"});
-//});
-//app.use('/', router);
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -46,22 +41,54 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 
-// Post question
+var alchemy = require('./alchemy');
+
+// Post question to Watson QA
 app.post('/ask', function(req,res) {
-	qa.ask(req, function(response) {
-		res.send(response);
+	var output = {};
+	var qText = (req.body).question;
+	var results = [];
+			
+	
+	qa.ask(req, function(qaresponse) {
+
+		//console.log("response: " + qaresponse);
+		// If you just want to show QA response, uncomment the following line
+		//res.send(qaresponse);
+
+		// collect the answers from evidencelist array in QAAPI response
+		var answers = (JSON.parse(qaresponse)).question.evidencelist;
+		var qAnswers=[];
+		var qtxt = (req.body).question;	
+		var tmp = {text:qtxt};
+		qAnswers.push(tmp);
+		
+		// filter our any empty answers from evidencelist
+		for(var i=0; i<answers.length; i++) {
+			var y = answers[i];
+			if(y != null && y != "null" && typeof y != "undefined" && (y instanceof Object && Object.keys(y).length != 0)) {
+				qAnswers.push(y);
+			}
+		}
+		
+		// call function defined in alchemy.js file to use AlchemyAPI service to collect keywords
+		alchemy.getKeywords(qAnswers, function(alchemyresp) {
+			//console.log('in alchemy get keywords in app js');
+			res.send(alchemyresp);
+		});
+		
 	});
+	
+
 });
 
 
 // Access Personality Insights module
 var pi = require('./watsonpi');
-
 app.post('/analyzeText',pi.analyzeText);
 
 // start server on the specified port and binding host
 app.listen(appEnv.port, appEnv.bind, function() {
-
-	// print a message when the server starts listening
+  // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });

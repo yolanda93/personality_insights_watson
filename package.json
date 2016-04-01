@@ -11,7 +11,7 @@
     "cfenv": "1.0.x",
     "body-parser": "*",
     "request": "*",
-    "watson-developer-cloud": "^0.9.22"
+    "async" : "latest"
   },
   "repository": {}
 }

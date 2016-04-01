@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 256M
+  instances: 1
+  domain: eu-gb.mybluemix.net
+  name: Yolanda-App
+  host: yolanda-app
+  disk_quota: 1024M
+  services:
+  - Personality Insights-25
+  - AlchemyAPI-oc
